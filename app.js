@@ -1,13 +1,24 @@
 const express = require('express');
 const app = express();
+const userRoute = require('./rotas');
+
+const users = [];
 
 app.get('/', (request, response) => {
-  response.json({
-    userName: 'Sany',
-    category: 'Balada',
-  });
+  response.sendFile(__dirname + '/index.html');
 });
 
-app.listen(5000, () => {
-  console.log(`Estamos escutando a porta 5000 do pc do TUZAO`);
+app.use(
+  '/user',
+  (_req, _res, next) => {
+    console.log('olaaaaa');
+    next();
+  },
+  userRoute
+);
+
+const port = 5001;
+
+app.listen(port, () => {
+  console.log(`Estamos escutando a porta ${port} do MAQUINA do TUZAO`);
 });
