@@ -1,21 +1,9 @@
 const express = require('express');
 const app = express();
-const userRoute = require('./rotas');
+const userRoute = require('./userRoutes');
 
-const users = [];
-
-app.get('/', (request, response) => {
-  response.sendFile(__dirname + '/index.html');
-});
-
-app.use(
-  '/user',
-  (_req, _res, next) => {
-    console.log('olaaaaa');
-    next();
-  },
-  userRoute
-);
+app.use(express.json());
+app.use('/user', userRoute);
 
 const port = 5001;
 
